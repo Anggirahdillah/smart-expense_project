@@ -8,9 +8,7 @@ function Sidebar() {
     location.pathname === path
       ? "bg-white text-teal-800 font-semibold shadow-md"
       : "text-white hover:bg-teal-700";
-  const Dashboard = () => {
-      // Ambil user dari localStorage setelah login
-      const user = JSON.parse(localStorage.getItem("user"));
+
   return (
     <>
       {/* DESKTOP SIDEBAR */}
@@ -111,8 +109,12 @@ function Sidebar() {
         >
 
           <h1 className="text-white text-xl font-bold">
-            {user?.name}
+            James Wilson
           </h1>
+
+          <p className="text-gray-300 text-sm">
+            Premium Member
+          </p>
 
         </div>
 
@@ -194,5 +196,5 @@ function Sidebar() {
     </>
   );
 }
-}
+
 export default Sidebar;
