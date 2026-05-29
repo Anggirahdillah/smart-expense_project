@@ -1,0 +1,9 @@
+{
+  "source": "monthly_features_ds",
+  "percentage": {
+    "kebutuhanPokok": 45,
+    "kebutuhanSekunder": 35,
+    "tabungan": 20
+  },
+  "insight": "Rule alokasi dibuat berdasarkan hasil olahan Data Science dari monthly_features."
+}
