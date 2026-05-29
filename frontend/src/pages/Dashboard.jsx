@@ -112,6 +112,9 @@ const [nominalTabungan, setNominalTabungan] =
 
   try {
 
+    console.log("SALARY =", salary);
+    console.log("BASE_URL =", BASE_URL);
+
     const token =
       localStorage.getItem("token");
 
@@ -127,6 +130,8 @@ const [nominalTabungan, setNominalTabungan] =
         },
       }
     );
+
+    console.log("RESPONSE =", response.data);
 
   const data =
     response.data.data;
