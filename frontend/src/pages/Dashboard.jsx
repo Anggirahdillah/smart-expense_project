@@ -93,6 +93,10 @@ function Dashboard() {
     }
   };
 
+const Dashboard = () => {
+  // Ambil user dari localStorage setelah login
+  const user = JSON.parse(localStorage.getItem("user"));
+
   return (
     <div className="flex flex-col lg:flex-row">
 
@@ -103,7 +107,7 @@ function Dashboard() {
 
         {/* WELCOME */}
         <div>
-
+      
           <h1 className="text-3xl md:text-5xl font-bold text-teal-800">
             Hello, {user?.name}
           </h1>
@@ -191,5 +195,5 @@ function Dashboard() {
     </div>
   );
 }
-
+}
 export default Dashboard;
