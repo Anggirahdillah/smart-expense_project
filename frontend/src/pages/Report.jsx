@@ -30,7 +30,7 @@ function Report() {
     try {
 
       const response = await axios.get(
-        `${BASE_URL}/report`,
+        `${BASE_URL}/api/report`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

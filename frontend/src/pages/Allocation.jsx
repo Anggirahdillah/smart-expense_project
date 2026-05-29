@@ -41,7 +41,7 @@ function Allocation() {
           localStorage.getItem("token");
 
         const response = await axios.get(
-          `${BASE_URL}/allocation`,
+          `${BASE_URL}/api/allocation`,
           {
             headers: {
               Authorization:
@@ -72,7 +72,7 @@ function Allocation() {
         localStorage.getItem("token");
 
       await axios.post(
-        `${BASE_URL}/allocation/calculate`,
+        `${BASE_URL}/api/allocation/calculate`,
         {
           salary,
         },

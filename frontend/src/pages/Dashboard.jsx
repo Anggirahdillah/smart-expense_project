@@ -31,7 +31,7 @@ function Dashboard() {
           localStorage.getItem("token");
 
         const response = await axios.get(
-          `${BASE_URL}/dashboard`,
+          `${BASE_URL}/api/dashboard`,
           {
             headers: {
               Authorization:

@@ -36,7 +36,7 @@ function Register() {
       setLoading(true);
 
       await axios.post(
-        `${BASE_URL}/auth/register`,
+        `${BASE_URL}/api/auth/register`,
         {
           name,
           email,
