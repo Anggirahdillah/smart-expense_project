@@ -72,7 +72,7 @@ function Allocation() {
         localStorage.getItem("token");
 
       await axios.post(
-        `${BASE_URL}/allocation`,
+        `${BASE_URL}/allocation/calculate`,
         {
           salary,
         },

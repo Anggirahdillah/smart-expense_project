@@ -1,7 +1,8 @@
 import express from "express";
 
 import {
- calculateAllocation
+  calculateAllocation,
+  getAllocations
 }
 from "../controllers/allocationController.js";
 
@@ -9,8 +10,13 @@ const router =
 express.Router();
 
 router.post(
- "/calculate",
- calculateAllocation
+  "/calculate",
+  calculateAllocation
+);
+
+router.get(
+  "/",
+  getAllocations
 );
 
 export default router;
