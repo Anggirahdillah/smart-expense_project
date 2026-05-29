@@ -15,10 +15,15 @@ connectDB();
 
 const app = express();
 
-app.use(cors({
-  origin: "https://capstonesmartexpense.netlify.app",
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://capstonesmartexpense.netlify.app"
+    ],
+    credentials: true
+  })
+);
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
@@ -39,3 +44,4 @@ app.get("/", (req, res) => {
     message: "Smart Expense API Running"
   });
 });
+

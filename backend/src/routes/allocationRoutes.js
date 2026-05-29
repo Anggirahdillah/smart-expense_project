@@ -2,7 +2,8 @@ import express from "express";
 
 import {
   calculateAllocation,
-  getAllocations
+  getAllocations,
+  getLatestAllocation
 }
 from "../controllers/allocationController.js";
 
@@ -17,6 +18,11 @@ router.post(
 router.get(
   "/",
   getAllocations
+);
+
+router.get(
+  "/latest",
+  getLatestAllocation
 );
 
 export default router;

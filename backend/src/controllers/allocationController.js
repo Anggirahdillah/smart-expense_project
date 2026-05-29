@@ -1,20 +1,27 @@
 import Allocation from "../models/allocationModel.js";
+import getAIRecommendation from "../services/aiService.js";
 
-export const calculateAllocation =
-async(req,res)=>{
+export const calculateAllocation = async (req, res) => {
 
-  try{
+  try {
 
     const { salary } = req.body;
 
+    const aiResult =
+      await getAIRecommendation({
+        income: salary
+      });
+
+    console.log("AI RESULT:", aiResult);
+
     const kebutuhanPokok =
-      salary * 0.5;
+      salary * aiResult.needs_rate;
 
     const sekunder =
-      salary * 0.3;
+      salary * aiResult.wants_rate;
 
     const tabungan =
-      salary * 0.2;
+      salary * aiResult.saving_rate;
 
     const allocation =
       await Allocation.create({
@@ -28,16 +35,18 @@ async(req,res)=>{
 
     res.status(200).json({
 
-      success:true,
-      data:allocation
+      success: true,
+      data: allocation
 
     });
 
-  }catch(error){
+  } catch (error) {
+
+    console.error(error);
 
     res.status(500).json({
 
-      message:error.message
+      message: error.message
 
     });
 
@@ -45,28 +54,51 @@ async(req,res)=>{
 
 };
 
-export const getAllocations =
-async(req,res)=>{
+export const getAllocations = async (req, res) => {
 
-  try{
+  try {
 
     const allocations =
       await Allocation.find()
-      .sort({ createdAt:-1 });
+      .sort({ createdAt: -1 });
 
     res.status(200).json({
 
-      success:true,
-      data:allocations
+      success: true,
+      data: allocations
 
     });
 
-  }catch(error){
+  } catch (error) {
 
     res.status(500).json({
 
-      message:error.message
+      message: error.message
 
+    });
+
+  }
+
+};
+
+export const getLatestAllocation =
+async (req, res) => {
+
+  try {
+
+    const allocation =
+      await Allocation.findOne()
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      data: allocation
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      message: error.message
     });
 
   }
