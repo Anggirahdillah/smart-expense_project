@@ -18,7 +18,7 @@ const app = express();
 app.use(
   cors({
     origin: 
-      "https://capstonesmartexpense.netlify.app",
+      "https://smartexpensecpstn.netlify.app",
     credentials: true
   })
 );
