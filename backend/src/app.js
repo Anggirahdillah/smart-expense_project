@@ -27,6 +27,15 @@ app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/report", reportRoutes);
 app.use("/api/ai", aiRoutes);
 
-app.listen(process.env.PORT, () => {
-  console.log("Server Running");
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server Running on ${PORT}`);
+});
+
+app.get("/", (req, res) => {
+  res.json({
+    status: "ok",
+    message: "Smart Expense API Running"
+  });
 });
