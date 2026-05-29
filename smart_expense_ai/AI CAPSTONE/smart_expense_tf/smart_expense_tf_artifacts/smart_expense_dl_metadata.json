@@ -1,0 +1,20 @@
+{
+  "feature_columns": [
+    "income",
+    "expense_total",
+    "cashflow",
+    "expense_rate"
+  ],
+  "target_columns": [
+    "needs_rate",
+    "wants_rate",
+    "saving_rate"
+  ],
+  "model_type": "TensorFlow Functional API",
+  "custom_components": [
+    "AllocationSoftmaxLayer",
+    "allocation_balance_loss",
+    "AllocationMonitorCallback"
+  ],
+  "output_description": "Prediksi rasio alokasi: needs_rate, wants_rate, saving_rate; total output = 1."
+}

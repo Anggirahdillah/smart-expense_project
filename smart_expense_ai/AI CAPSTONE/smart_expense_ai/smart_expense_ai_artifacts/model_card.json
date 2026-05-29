@@ -1,0 +1,43 @@
+{
+  "project": "Smart Expense",
+  "team_id": "CC26-PSU402",
+  "ai_scope": [
+    "Rule-based allocation recommendation",
+    "Smart suggestion generation",
+    "Financial persona segmentation support",
+    "Backend integration payload"
+  ],
+  "recommended_production_mode": "rule_based_core_with_optional_ml_insight",
+  "input": {
+    "amount": "Nominal uang/gaji pengguna",
+    "profile": "hemat/seimbang/agresif_menabung"
+  },
+  "output": [
+    "allocation",
+    "percentages",
+    "suggestions",
+    "persona"
+  ],
+  "limitations": [
+    "Dataset historis bersifat simulasi dan belum mewakili semua kondisi pengguna.",
+    "Model ML hanya digunakan sebagai insight pendukung, bukan keputusan finansial mutlak.",
+    "Rekomendasi perlu disertai disclaimer bahwa hasil bersifat edukatif."
+  ],
+  "metrics": {
+    "persona_silhouette_score": 0.2557669157737998,
+    "regression_mae": [
+      {
+        "target": "needs_rate",
+        "MAE": 0.11195077370388624
+      },
+      {
+        "target": "wants_rate",
+        "MAE": 0.16758204837483295
+      },
+      {
+        "target": "saving_rate",
+        "MAE": 0.12915450701119163
+      }
+    ]
+  }
+}
