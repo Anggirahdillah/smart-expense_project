@@ -1,7 +1,6 @@
 import axios from "axios";
 
-export const predictAllocation =
-async(data)=>{
+const getAIRecommendation = async (data) => {
 
  const response =
  await axios.post(
@@ -11,3 +10,5 @@ async(data)=>{
 
  return response.data;
 };
+
+export default getAIRecommendation;
