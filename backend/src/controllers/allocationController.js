@@ -6,6 +6,8 @@ export const calculateAllocation = async (req, res) => {
   try {
 
     const { salary } = req.body;
+    console.log("REQ BODY =", req.body);
+console.log("SALARY =", salary);
 
     const aiResult =
       await getAIRecommendation({
@@ -104,3 +106,4 @@ async (req, res) => {
   }
 
 };
+
