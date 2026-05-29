@@ -17,10 +17,8 @@ const app = express();
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://capstonesmartexpense.netlify.app"
-    ],
+    origin: 
+      "https://capstonesmartexpense.netlify.app",
     credentials: true
   })
 );
