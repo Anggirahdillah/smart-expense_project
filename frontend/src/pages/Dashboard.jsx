@@ -12,60 +12,40 @@ function Dashboard() {
   const [salary, setSalary] = useState(0);
 
   const [kebutuhanPokok, setKebutuhanPokok] =
-    useState(50);
+    useState(0);
 
   const [sekunder, setSekunder] =
-    useState(30);
+    useState(0);
 
   const [tabungan, setTabungan] =
-    useState(20);
+    useState(0);
 
+  const [nominalPokok, setNominalPokok] =
+  useState(0);
+
+const [nominalSekunder, setNominalSekunder] =
+  useState(0);
+
+const [nominalTabungan, setNominalTabungan] =
+  useState(0);
+
+  const user =
+      JSON.parse(
+        localStorage.getItem("user")
+      );
+  
   // FETCH DASHBOARD
   useEffect(() => {
 
-    const fetchDashboard = async () => {
-
-      try {
-
-        const token =
-          localStorage.getItem("token");
-
-        const response = await axios.get(
-          `${BASE_URL}/api/dashboard`,
-          {
-            headers: {
-              Authorization:
-                `Bearer ${token}`,
-            },
-          }
-        );
-
-        console.log(response.data);
-
-      } catch (error) {
-
-        console.log(error);
-
-      }
-    };
-
-    fetchDashboard();
-
-  }, []);
-
-  // AI RECOMMENDATION
-  const handleAIRecommendation = async () => {
+  const fetchDashboard = async () => {
 
     try {
 
       const token =
         localStorage.getItem("token");
 
-      const response = await axios.post(
-        `${BASE_URL}/api/ai/recommendation`,
-        {
-          salary,
-        },
+      const response = await axios.get(
+        `${BASE_URL}/api/allocation/latest`,
         {
           headers: {
             Authorization:
@@ -74,16 +54,45 @@ function Dashboard() {
         }
       );
 
+      const data =
+        response.data.data;
+
+      if (!data) return;
+
+      const total =
+        data.kebutuhanPokok +
+        data.sekunder +
+        data.tabungan;
+
+      setSalary(data.salary);
+      setNominalPokok(
+        data.kebutuhanPokok
+      );
+
+      setNominalSekunder(
+        data.sekunder
+      );
+
+      setNominalTabungan(
+        data.tabungan
+      );
+
       setKebutuhanPokok(
-        response.data.kebutuhanPokok
+        Math.round(
+          (data.kebutuhanPokok / total) * 100
+        )
       );
 
       setSekunder(
-        response.data.sekunder
+        Math.round(
+          (data.sekunder / total) * 100
+        )
       );
 
       setTabungan(
-        response.data.tabungan
+        Math.round(
+          (data.tabungan / total) * 100
+        )
       );
 
     } catch (error) {
@@ -92,6 +101,79 @@ function Dashboard() {
 
     }
   };
+
+  fetchDashboard();
+
+}, []);
+
+
+  // AI RECOMMENDATION
+ const handleAIRecommendation = async () => {
+
+  try {
+
+    const token =
+      localStorage.getItem("token");
+
+    const response = await axios.post(
+      `${BASE_URL}/api/allocation/calculate`,
+      {
+        salary,
+      },
+      {
+        headers: {
+          Authorization:
+            `Bearer ${token}`,
+        },
+      }
+    );
+
+  const data =
+    response.data.data;
+
+    setNominalPokok(
+      data.kebutuhanPokok
+    );
+
+    setNominalSekunder(
+      data.sekunder
+    );
+
+    setNominalTabungan(
+      data.tabungan
+    );
+
+
+    const total =
+      data.kebutuhanPokok +
+      data.sekunder +
+      data.tabungan;
+
+    setKebutuhanPokok(
+      Math.round(
+        (data.kebutuhanPokok / total) * 100
+      )
+    );
+
+    setSekunder(
+      Math.round(
+        (data.sekunder / total) * 100
+      )
+    );
+
+    setTabungan(
+      Math.round(
+        (data.tabungan / total) * 100
+      )
+    );
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+};
+
 
   return (
     <div className="flex flex-col lg:flex-row">
@@ -105,7 +187,7 @@ function Dashboard() {
         <div>
 
           <h1 className="text-3xl md:text-5xl font-bold text-teal-800">
-            Hello, James
+            Hello, {user?.name || "User"}
           </h1>
 
           <p className="text-gray-500 mt-2 text-base md:text-xl">
@@ -167,23 +249,23 @@ function Dashboard() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-          <ProgressCard
-            title="Kebutuhan Pokok"
-            amount={`${kebutuhanPokok}%`}
-            percent={kebutuhanPokok}
-          />
+         <ProgressCard
+          title="Kebutuhan Pokok"
+          amount={`Rp ${nominalPokok.toLocaleString("id-ID")}`}
+          percent={kebutuhanPokok}
+        />
 
           <ProgressCard
-            title="Sekunder"
-            amount={`${sekunder}%`}
-            percent={sekunder}
-          />
+          title="Sekunder"
+          amount={`Rp ${nominalSekunder.toLocaleString("id-ID")}`}
+          percent={sekunder}
+        />
 
           <ProgressCard
-            title="Tabungan"
-            amount={`${tabungan}%`}
-            percent={tabungan}
-          />
+        title="Tabungan"
+        amount={`Rp ${nominalTabungan.toLocaleString("id-ID")}`}
+        percent={tabungan}
+      />
 
         </div>
 

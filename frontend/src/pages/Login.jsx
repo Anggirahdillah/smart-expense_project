@@ -40,6 +40,13 @@ function Login() {
         response.data.token
       );
 
+      localStorage.setItem(
+        "user",
+        JSON.stringify(
+          response.data.user
+        )
+      );
+
       navigate("/dashboard");
 
     } catch (error) {

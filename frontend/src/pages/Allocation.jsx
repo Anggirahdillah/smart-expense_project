@@ -22,13 +22,13 @@ function Allocation() {
 
   // PERSENTASE
   const [kebutuhanPokok, setKebutuhanPokok] =
-    useState(50);
+    useState(0);
 
   const [sekunder, setSekunder] =
-    useState(30);
+    useState(0);
 
   const [tabungan, setTabungan] =
-    useState(20);
+    useState(0);
 
   // GET DATA
   useEffect(() => {
@@ -71,20 +71,45 @@ function Allocation() {
       const token =
         localStorage.getItem("token");
 
-      await axios.post(
-        `${BASE_URL}/api/allocation/calculate`,
-        {
-          salary,
-        },
-        {
-          headers: {
-            Authorization:
-              `Bearer ${token}`,
+      const response = await axios.post(
+          `${BASE_URL}/api/allocation/calculate`,
+          {
+            salary,
           },
-        }
-      );
+          {
+            headers: {
+              Authorization:
+                `Bearer ${token}`,
+            },
+          }
+        );
 
-      alert("Alokasi berhasil disimpan");
+        const data = response.data.data;
+
+        const total =
+          data.kebutuhanPokok +
+          data.sekunder +
+          data.tabungan;
+
+        setKebutuhanPokok(
+          Math.round(
+            (data.kebutuhanPokok / total) * 100
+          )
+        );
+
+        setSekunder(
+          Math.round(
+            (data.sekunder / total) * 100
+          )
+        );
+
+        setTabungan(
+          Math.round(
+            (data.tabungan / total) * 100
+          )
+        );
+
+        alert("Alokasi berhasil disimpan");
 
     } catch (error) {
 

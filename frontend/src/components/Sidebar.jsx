@@ -3,7 +3,10 @@ import { Link, useLocation } from "react-router-dom";
 function Sidebar() {
 
   const location = useLocation();
-
+  const user =
+  JSON.parse(
+    localStorage.getItem("user")
+  );
   const menuClass = (path) =>
     location.pathname === path
       ? "bg-white text-teal-800 font-semibold shadow-md"
@@ -108,13 +111,9 @@ function Sidebar() {
           "
         >
 
-          <h1 className="text-white text-xl font-bold">
-            James Wilson
+         <h1 className="text-white text-xl font-bold">
+            {user?.name || "User"}
           </h1>
-
-          <p className="text-gray-300 text-sm">
-            Premium Member
-          </p>
 
         </div>
 
@@ -189,7 +188,7 @@ function Sidebar() {
           >
             Laporan
           </Link>
-
+                
         </div>
 
       </div>
