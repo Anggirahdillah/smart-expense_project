@@ -11,8 +11,7 @@ const getAIRecommendation = async (data) => {
   );
 
   console.log("AI RESPONSE:", response.data);
-  
-
+ 
   return response.data;
 };
 
