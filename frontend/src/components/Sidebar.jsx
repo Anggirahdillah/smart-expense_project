@@ -109,12 +109,8 @@ function Sidebar() {
         >
 
           <h1 className="text-white text-xl font-bold">
-            James Wilson
+            {user?.name}
           </h1>
-
-          <p className="text-gray-300 text-sm">
-            Premium Member
-          </p>
 
         </div>
 

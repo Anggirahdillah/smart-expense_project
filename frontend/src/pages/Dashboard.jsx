@@ -62,7 +62,7 @@ function Dashboard() {
         localStorage.getItem("token");
 
       const response = await axios.post(
-        `${BASE_URL}/ai/recommendation`,
+        `${BASE_URL}/api/ai/recommendation`,
         {
           salary,
         },
@@ -105,7 +105,7 @@ function Dashboard() {
         <div>
 
           <h1 className="text-3xl md:text-5xl font-bold text-teal-800">
-            Hello, James
+            Hello, {user?.name}
           </h1>
 
           <p className="text-gray-500 mt-2 text-base md:text-xl">

@@ -58,7 +58,7 @@ function Report() {
     try {
 
       await axios.post(
-        `${BASE_URL}/report`,
+        `${BASE_URL}/api/report`,
         {
           month,
           income: Number(income),
