@@ -16,7 +16,7 @@ connectDB();
 const app = express();
 
 app.use(cors({
-  origin: "https://capstonesmartexpense.netlify.app/",
+  origin: "https://capstonesmartexpense.netlify.app",
   credentials: true,
 }));
 app.use(express.json());
