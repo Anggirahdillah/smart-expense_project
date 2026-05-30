@@ -2,18 +2,26 @@ import mongoose from "mongoose";
 
 const reportSchema = new mongoose.Schema(
   {
+
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+
     month: {
       type: String,
-      required: true
+      required: true,
     },
 
     income: {
       type: Number,
-      required: true
-    }
+      required: true,
+    },
+
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 

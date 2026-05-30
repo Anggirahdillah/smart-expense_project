@@ -28,12 +28,14 @@ console.log("SALARY =", salary);
     const allocation =
       await Allocation.create({
 
-        salary,
-        kebutuhanPokok,
-        sekunder,
-        tabungan
+      user: req.user._id,
 
-      });
+      salary,
+      kebutuhanPokok,
+      sekunder,
+      tabungan
+
+    });
 
     res.status(200).json({
 
@@ -61,7 +63,10 @@ export const getAllocations = async (req, res) => {
   try {
 
     const allocations =
-      await Allocation.find()
+      await Allocation.find({
+         user: req.user._id
+      })
+      
       .sort({ createdAt: -1 });
 
     res.status(200).json({
@@ -89,7 +94,9 @@ async (req, res) => {
   try {
 
     const allocation =
-      await Allocation.findOne()
+      await Allocation.findOne({
+        user: req.user._id
+      })
       .sort({ createdAt: -1 });
 
     res.status(200).json({

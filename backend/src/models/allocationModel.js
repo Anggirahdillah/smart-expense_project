@@ -2,6 +2,13 @@ import mongoose from "mongoose";
 
 const allocationSchema = new mongoose.Schema(
   {
+
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+
     salary: {
       type: Number,
       required: true,
@@ -18,6 +25,7 @@ const allocationSchema = new mongoose.Schema(
     tabungan: {
       type: Number,
     },
+
   },
   {
     timestamps: true,

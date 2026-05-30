@@ -5,8 +5,12 @@ export const createReport = async (req, res) => {
     const { month, income } = req.body;
     const report =
       await Report.findOneAndUpdate(
-        { month },
         {
+          user: req.user._id,
+          month
+        },
+        {
+          user: req.user._id,
           month,
           income
         },
@@ -32,7 +36,9 @@ export const getReports = async (req, res) => {
 
   try {
     const reports =
-      await Report.find();
+      await Report.find({
+         user: req.user._id
+      });
     res.status(200).json({
       success: true,
       data: reports
