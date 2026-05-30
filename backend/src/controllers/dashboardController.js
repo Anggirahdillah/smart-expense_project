@@ -3,7 +3,9 @@ import Allocation from "../models/allocationModel.js";
 export const getDashboard = async (req, res) => {
   try {
     const latestAllocation =
-      await Allocation.findOne()
+      await Allocation.findOne({
+        user: req.user._id
+      })
       .sort({ createdAt: -1 });
 
     if (!latestAllocation) {
@@ -29,7 +31,9 @@ async (req, res) => {
   try {
 
     const allocation =
-      await Allocation.findOne()
+      await Allocation.findOne({
+        user: req.user._id
+      })
       .sort({ createdAt: -1 });
 
     res.status(200).json({
