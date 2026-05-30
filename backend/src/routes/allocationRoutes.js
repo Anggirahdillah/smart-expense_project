@@ -6,7 +6,7 @@ import {
   getLatestAllocation
 }
 from "../controllers/allocationController.js";
-import protect from "../middleware/authMiddleware.js";
+import protect from "../middlewares/authMiddleware.js";
 
 const router =
 express.Router();
